@@ -1,4 +1,4 @@
 # IT202MM
-#IT202-008
-#Michael McGillycuddy
-#I am a CS major and an NJIT athlete.
+#1)IT202-008
+#2)Michael McGillycuddy
+#3)Major in CS, NJIT athlete.
