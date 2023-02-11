@@ -10,6 +10,7 @@ function bePositive($arr) {
     //TODO use echo to output all of the values as positive (even if they were originally positive) 
     foreach($arr as $num){
         echo(abs($num) . "\n");
+        echo(var_dump(abs($num)));
     }
     //hint: may want to use var_dump() to show final data types
 }
