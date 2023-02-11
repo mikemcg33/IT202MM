@@ -11,7 +11,6 @@ function bePositive($arr) {
     foreach($arr as $num){
         $typenum=gettype($num);
         echo((gettype($typenum))(abs($num)));
-        echo(gettype((gettype($typenum))(abs($num))));
     }
     //hint: may want to use var_dump() to show final data types
 }
