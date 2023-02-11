@@ -8,10 +8,10 @@ function bePositive($arr) {
     echo "<br>Processing Array:<br><pre>" . var_export($arr, true) . "</pre>";
     echo "<br>Positive output:<br>";
     //TODO use echo to output all of the values as positive (even if they were originally positive) 
-    
+    $var=gettype($arr[0]);
     foreach($arr as $num){
-        //$tpe=gettype($num);
-        echo((abs($num)));
+        echo(($var)(abs($num)));
+        echo(var_dump($num));
     }
     //hint: may want to use var_dump() to show final data types
 }
