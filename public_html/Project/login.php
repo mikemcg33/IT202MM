@@ -32,30 +32,32 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         flash("Email must not be empty");
         $hasError = true;
     }
-    //sanatize
+    //sanitize
     //$email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    $email=sanitize_email($email);
+    $email = sanitize_email($email);
     //validate
-    /*if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        flash("Please enter a valid email <br>");
+    /*if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        flash("Invalid email address");
         $hasError = true;
     }*/
-    if(!is_valid_email($email)){
-        flash("Please enter a valid email <br>");
+    if (!is_valid_email($email)) {
+        flash("Invalid email address");
         $hasError = true;
     }
     if (empty($password)) {
         flash("password must not be empty");
         $hasError = true;
     }
-    if (strlen($password) < 8) {
+    if (!is_valid_password($password)) {
         flash("Password too short");
         $hasError = true;
     }
     if (!$hasError) {
+        //flash("Welcome, $email");
         //TODO 4
         $db = getDB();
-        $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email");
+        $stmt = $db->prepare("SELECT id, email, username, password from Users 
+        where email = :email");
         try {
             $r = $stmt->execute([":email" => $email]);
             if ($r) {
@@ -64,8 +66,9 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                     $hash = $user["password"];
                     unset($user["password"]);
                     if (password_verify($password, $hash)) {
-                        flash("Welcome $email");
-                        $_SESSION["user"]=$user;
+                        //flash("Weclome $email");
+                        $_SESSION["user"] = $user; //sets our session data from db
+                        flash("Welcome, " . get_username());
                         die(header("Location: home.php"));
                     } else {
                         flash("Invalid password");
@@ -80,4 +83,5 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     }
 }
 ?>
-<?php require_once(__DIR__."/../../partials/flash.php");
+<?php 
+require(__DIR__."/../../partials/flash.php");
