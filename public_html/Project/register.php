@@ -5,7 +5,7 @@ reset_session();
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
-        <input type="email" name="email" required />
+        <input type="text" name="email" required />
     </div>
     <div>
         <label for="username">Username</label>
@@ -13,11 +13,11 @@ reset_session();
     </div>
     <div>
         <label for="pw">Password</label>
-        <input type="password" id="pw" name="password" required minlength="8" />
+        <input type="password" id="pw" name="password" />
     </div>
     <div>
         <label for="confirm">Confirm</label>
-        <input type="password" name="confirm" required minlength="8" />
+        <input type="password" name="confirm"  />
     </div>
     <input type="submit" value="Register" />
 </form>
@@ -25,7 +25,7 @@ reset_session();
     function validate(form) {
         //TODO 1: implement JavaScript validation
         //ensure it returns false for an error and true for success
-        if(form.email.value.trim()===""){
+       if(form.email.value.trim()===""){
             flash("Enter email");
             return false;
         }
@@ -41,7 +41,7 @@ reset_session();
             flash("Passwords don't match");
             return false;
         }
-        if(form.password.value.trim().length()<8){
+        if(form.password.value.trim().length<8){
             flash("Password needs to be 8 or more characters long");
             return false;
         }
