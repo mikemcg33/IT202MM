@@ -16,7 +16,7 @@ require(__DIR__ . "/../../partials/nav.php");
     function validate(form) {
         //TODO 1: implement JavaScript validation
         //ensure it returns false for an error and true for success
-        if(form.email.value.trim()===""){
+       if(form.email.value.trim()===""){
             flash("Enter valid email or user");
             return false;
         }
