@@ -25,7 +25,26 @@ reset_session();
     function validate(form) {
         //TODO 1: implement JavaScript validation
         //ensure it returns false for an error and true for success
-
+        if(form.email.value.trim()===""){
+            flash("Enter email");
+            return false;
+        }
+        if(form.username.value.trim()===""){
+            flash("Enter Username");
+            return false;
+        }
+        if(form.confirm.value.trim()===""){
+            flash("Confirm Password");
+            return false;
+        }
+        if(form.password.value.trim()!==form.confirm.value.trim()){
+            flash("Passwords don't match");
+            return false;
+        }
+        if(form.password.value.trim().length()<8){
+            flash("Password needs to be 8 or more characters long");
+            return false;
+        }
         return true;
     }
 </script>
