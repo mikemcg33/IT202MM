@@ -1,0 +1,40 @@
+.alert-success {
+    background-color: green
+}
+
+.alert-warning {
+    background-color: yellow;
+}
+
+.alert-danger {
+    background-color: red;
+}
+
+.alert-info {
+    background-color: teal;
+}
+nav li{display: inline; background-color: rgb(229, 235, 55); font-size: large;}
+nav li a{color: rgb(0, 0, 0)}
+input{border-radius: 0%;}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  label {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px;
+  }
+  
+
+body{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+
+}
+
