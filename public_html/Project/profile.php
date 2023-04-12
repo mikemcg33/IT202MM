@@ -96,7 +96,7 @@ $username = get_username();
 <form method="POST" onsubmit="return validate(this);">
     <div class="mb-3">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" value="<?php se($email); ?>" />
+        <input type="text" name="email" id="email" value="<?php se($email); ?>" />
     </div>
     <div class="mb-3">
         <label for="username">Username</label>

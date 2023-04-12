@@ -9,11 +9,11 @@ reset_session();
     </div>
     <div>
         <label for="username">Username</label>
-        <input type="text" name="username" required maxlength="30" />
+        <input type="text" name="username" required maxlength="30"/>
     </div>
     <div>
         <label for="pw">Password</label>
-        <input type="password" id="pw" name="password" />
+        <input type="password" id="pw" name="password"/>
     </div>
     <div>
         <label for="confirm">Confirm</label>
