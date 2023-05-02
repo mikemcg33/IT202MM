@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS Money_History(
+    -- this will be like the bank project transactions table (pairs of transactions)
+    id int AUTO_INCREMENT PRIMARY KEY,
+    src int,
+    dest int,
+    diff int,
+    reason varchar(15) not null COMMENT 'The type of transaction that occurred',
+    memo varchar(240) default null COMMENT 'Any extra details to attach to the transaction',
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+    expected_total DECIMAL(10,2) NOT NULL DEFAULT '0',
+    FOREIGN KEY (src) REFERENCES Accounts(id),
+    FOREIGN KEY(dest) REFERENCES Accounts(id),
+    constraint ZeroTransferNotAllowed CHECK(diff != 0)
+)
