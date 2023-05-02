@@ -3,3 +3,6 @@ INSERT INTO Users(id, username, email, password, created, modified) VALUES (-1, 
 
 -- Create the world account
 INSERT INTO Accounts(id, account_number, account_type, user_id) VALUES (-1, 000000000000, 'world', -1);
+
+Update Accounts Set balance=0 where id=-1;
+Update Accounts Set balance=0 where id=13;

@@ -42,6 +42,10 @@ session_start();
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('create_account.php'); ?>">Create Account</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('accounts.php'); ?>">List Accounts</a></li>
                 <?php endif; ?>
+                <?php if (is_logged_in()) : ?>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('deposit.php'); ?>">Deposit</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('withdraw.php'); ?>">Withdraw</a></li>
+                    <?php endif; ?>
                 <?php if (!is_logged_in()) : ?>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('login.php'); ?>">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('register.php'); ?>">Register</a></li>

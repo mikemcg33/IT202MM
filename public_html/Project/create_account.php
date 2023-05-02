@@ -10,16 +10,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $account_type = $_POST["account_type"];
     $deposit_amount = $_POST["deposit_amount"];
   
+    // Check if deposit amount is at least $5
+    if ($deposit_amount < 5) {
+      //Flash fail
+      flash("Minimum Deposit 5 Dollars","danger");
+      // Redirect back to the create account page
+      header("Location: create_account.php");
+      exit();
+    }
+
     // Insert new account record for user with null account number
     $user_id = get_user_id();
 
     if (!empty($user_id)) {
-      $stmt = $db->prepare("INSERT INTO Accounts (user_id, account_type, balance) VALUES (?, ?, ?)");
-      $stmt->execute([$user_id, $account_type, $deposit_amount]);
+      $stmt = $db->prepare("INSERT INTO Accounts (user_id, account_type) VALUES (?, ?)");
+      $stmt->execute([$user_id, $account_type]);
     }
 
     // Get last insert id
     $account_id = $db->lastInsertId();
+
+    // Add deposit transaction to the account
+    transactions($deposit_amount, "deposit", -1, $account_id, "Initial deposit");
 
     // Generate account number using left-padding
     $account_number = str_pad($account_id, 12, '0', STR_PAD_LEFT);
@@ -32,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     flash("Welcome! Your account has been created successfully","success");
     
     // Redirect to account list page
-    header("Location: accounts.php");
+    header("Location: create_account.php");
     exit();
   } catch (PDOEXCEPTION $e) { 
     //Flash fail
@@ -41,7 +53,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 ?>
-
+<?php
+require(__DIR__ . "/../../partials/flash.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,8 +71,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <option value="loan">Loan</option>
     </select><br><br>
     <label for="deposit_amount">Deposit Amount:</label>
-    <input type="number" name="deposit_amount" id="deposit_amount" min="5"><br><br>
+    <input type="number" name="deposit_amount" id="deposit_amount"><br><br>
     <input type="submit" value="Create Account">
   </form>
 </body>
 </html>
+

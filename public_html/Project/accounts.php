@@ -18,7 +18,8 @@ $accounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <ul>
   <?php foreach ($accounts as $account): ?>
     <li>
-      <?php echo $account["account_type"]; ?> - <?php echo $account["account_number"]; ?> - <?php echo $account["balance"]; ?>
+      <?php echo $account["account_type"]; ?> - <?php echo $account["account_number"]; ?> - <?php echo $account["balance"]; ?> - <?php echo $account["modified"]; ?>
+      <a href="<?php echo get_url('transaction_history.php?account_id='.$account['id']); ?>">View Transactions</a>
     </li>
   <?php endforeach; ?>
   </ul>
