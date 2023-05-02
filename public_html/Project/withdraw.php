@@ -50,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 require(__DIR__ . "/../../partials/flash.php");
 ?>
+<h1 class="text-left my-5">Withdraw</h1>
 <form method="POST">
     <div class="form-group">
         <label for="account_id">Select account:</label>
