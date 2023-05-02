@@ -7,5 +7,4 @@ CREATE TABLE Accounts(
   user_id int NOT NULL,
   balance DECIMAL(10, 2) NOT NULL DEFAULT 0,
   FOREIGN KEY (user_id) REFERENCES Users(id),
-  check(balance>=0 AND LENGTH(account_number)=12)
-);
+  );
