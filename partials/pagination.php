@@ -46,3 +46,17 @@ function check_apply_disabled_next($page)
     </ul>
 </nav>
 
+
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li class="page-item <?php check_apply_disabled_prev(($page - 1)) ?>">
+            <a class="page-link" href="?<?php se(persistQueryString($page - 1)); ?>" tabindex="-1">Previous</a>
+        </li>
+        <?php for ($i = 0; $i < $total_pages; $i++) : ?>
+            <li class="page-item <?php check_apply_active($page, $i); ?>"><a class="page-link" href="?<?php se(persistQueryString($i + 1)); ?>"><?php echo ($i + 1); ?></a></li>
+        <?php endfor; ?>
+        <li class="page-item <?php check_apply_disabled_next($page); ?>">
+            <a class="page-link" href="?<?php se(persistQueryString($page + 1)); ?>">Next</a>
+        </li>
+    </ul>
+</nav>
