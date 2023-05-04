@@ -69,18 +69,22 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         //flash("Welcome, $email");
         //TODO 4
         $db = getDB();
-        $stmt = $db->prepare("SELECT id, email, username, password from Users 
+        $stmt = $db->prepare("SELECT id, firstname, lastname, email, username, password from Users 
         where email = :email or username=:email");
         try {
             $r = $stmt->execute([":email" => $email]);
             if ($r) {
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                $firstname = $stmt->fetch(PDO::FETCH_ASSOC);
+                $lastname = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($user) {
                     $hash = $user["password"];
                     unset($user["password"]);
                     if (password_verify($password, $hash)) {
                         //flash("Weclome $email");
                         $_SESSION["user"] = $user; //sets our session data from db
+                        $_SESSION["firstname"] = $firstname;
+                        $_SESSION["lastname"] = $lastname;
                         try {
                             //lookup potential roles
                             $stmt = $db->prepare("SELECT Roles.name FROM Roles 
