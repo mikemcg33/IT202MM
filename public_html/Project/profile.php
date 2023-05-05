@@ -8,6 +8,7 @@ if (isset($_POST["save"])) {
     $lastname = se($_POST, "lastname", null, false);
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
+    $is_public = se($_POST, "is_public", false, false);
     $hasError = false;
     //sanitize
     $email = sanitize_email($email);
@@ -21,9 +22,9 @@ if (isset($_POST["save"])) {
         $hasError = true;
     }
     if (!$hasError) {
-        $params = [":firstname" => $firstname, ":lastname" => $lastname, ":email" => $email, ":username" => $username, ":id" => get_user_id()];
+        $params = [":firstname" => $firstname, ":lastname" => $lastname, ":email" => $email, ":username" => $username, ":id" => get_user_id(), ":is_public" => $is_public];
         $db = getDB();
-        $stmt = $db->prepare("UPDATE Users set firstname = :firstname, lastname = :lastname, email = :email, username = :username where id = :id");
+        $stmt = $db->prepare("UPDATE Users set firstname = :firstname, lastname = :lastname, email = :email, username = :username, is_public = :is_public where id = :id");
         try {
             $stmt->execute($params);
             flash("Profile saved", "success");
@@ -31,7 +32,7 @@ if (isset($_POST["save"])) {
             users_check_duplicate($e->errorInfo);
         }
         //select fresh data from table
-        $stmt = $db->prepare("SELECT id, firstname, lastname, email, username from Users where id = :id LIMIT 1");
+        $stmt = $db->prepare("SELECT id, firstname, lastname, email, username, is_public from Users where id = :id LIMIT 1");
         try {
             $stmt->execute([":id" => get_user_id()]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -41,6 +42,7 @@ if (isset($_POST["save"])) {
                 $_SESSION["user"]["lastname"] = $user["lastname"];
                 $_SESSION["user"]["email"] = $user["email"];
                 $_SESSION["user"]["username"] = $user["username"];
+                $_SESSION["user"]["is_public"] = $user["is_public"];
             } else {
                 flash("User doesn't exist", "danger");
             }
@@ -98,6 +100,7 @@ $firstname = get_firstname();
 $lastname = get_lastname();
 $email = get_user_email();
 $username = get_username();
+$is_public = get_user_is_public();
 ?>
 <div class="container-fluid">
     <h1>Profile</h1>
@@ -132,7 +135,14 @@ $username = get_username();
             <label class="form-label" for="conp">Confirm Password</label>
             <input class="form-control" type="password" name="confirmPassword" id="conp" />
         </div>
-        <input type="submit" class="mt-3 btn btn-primary" value="Update Profile" name="save" />
+        <div class="mb-3">
+        <label class="form-label" for="is_public">Profile visibility:</label>
+        <select class="form-control" name="is_public" id="is_public">
+            <option value="1" <?php if(get_user_is_public()) echo "selected"; ?>>Public</option>
+            <option value="0" <?php if(!get_user_is_public()) echo "selected"; ?>>Private</option>
+        </select>
+        </div>
+        <button class="btn btn-primary" type="submit" name="save">Save</button>
     </form>
 </div>
 
