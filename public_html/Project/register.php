@@ -6,6 +6,14 @@ reset_session();
     <h1>Register</h1>
     <form onsubmit="return validate(this)" method="POST">
         <div class="mb-3">
+            <label class="form-label" for="firstname">First Name</label>
+            <input class="form-control" type="firstname" id="firstname" name="firstname" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="lastname">Last Name</label>
+            <input class="form-control" type="lastname" id="lastname" name="lastname" required />
+        </div>
+        <div class="mb-3">
             <label class="form-label" for="email">Email</label>
             <input class="form-control" type="email" id="email" name="email" required />
         </div>
@@ -28,7 +36,15 @@ reset_session();
     function validate(form) {
         //TODO 1: implement JavaScript validation
         //ensure it returns false for an error and true for success
-       if(form.email.value.trim()===""){
+        if(form.firstname.value.trim()===""){
+            flash("Enter First Name");
+            return false;
+        }
+        if(form.lastname.value.trim()===""){
+            flash("Enter Last Name");
+            return false;
+        }
+        if(form.email.value.trim()===""){
             flash("Enter email");
             return false;
         }
@@ -53,13 +69,23 @@ reset_session();
 </script>
 <?php
 //TODO 2: add PHP Code
-if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"]) && isset($_POST["username"])) {
+if (isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"]) && isset($_POST["username"])) {
+    $firstname = se($_POST, "firstname", "", false);
+    $lastname = se($_POST, "lastname", "", false);
     $email = se($_POST, "email", "", false);
     $password = se($_POST, "password", "", false);
     $confirm = se($_POST, "confirm", "", false);
     $username = se($_POST, "username", "", false);
     //TODO 3
     $hasError = false;
+    if (empty($firstname)) {
+        flash("First Name must not be empty", "danger");
+        $hasError = true;
+    }
+    if (empty($lastname)) {
+        flash("Last Name must not be empty", "danger");
+        $hasError = true;
+    }
     if (empty($email)) {
         flash("Email must not be empty", "danger");
         $hasError = true;
@@ -97,9 +123,9 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         //TODO 4
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
-        $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
+        $stmt = $db->prepare("INSERT INTO Users (firstname, lastname, email, password, username) VALUES(:firstname, :lastname, :email, :password, :username)");
         try {
-            $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
+            $stmt->execute([":firstname" => $firstname, ":lastname" => $lastname, ":email" => $email, ":password" => $hash, ":username" => $username]);
             flash("Successfully registered!", "success");
         } catch (Exception $e) {
             users_check_duplicate($e->errorInfo);

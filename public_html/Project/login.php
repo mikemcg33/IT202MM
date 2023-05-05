@@ -66,36 +66,34 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         $hasError = true;
     }
     if (!$hasError) {
-        //flash("Welcome, $email");
-        //TODO 4
         $db = getDB();
-        $stmt = $db->prepare("SELECT id, email, username, password from Users 
-        where email = :email or username=:email");
+        $stmt = $db->prepare("SELECT id, firstname, lastname, email, username, password from Users 
+            where email = :email or username=:email");
         try {
             $r = $stmt->execute([":email" => $email]);
             if ($r) {
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($user) {
                     $hash = $user["password"];
+                    $user_id = $user["id"]; // add this line to get the user id
                     unset($user["password"]);
                     if (password_verify($password, $hash)) {
-                        //flash("Weclome $email");
-                        $_SESSION["user"] = $user; //sets our session data from db
+                        $_SESSION["user"] = $user; // sets our session data from db
+                        $_SESSION["user_id"] = $user_id; // sets the user_id in the session
                         try {
-                            //lookup potential roles
                             $stmt = $db->prepare("SELECT Roles.name FROM Roles 
-                        JOIN UserRoles on Roles.id = UserRoles.role_id 
-                        where UserRoles.user_id = :user_id and Roles.is_active = 1 and UserRoles.is_active = 1");
-                            $stmt->execute([":user_id" => $user["id"]]);
-                            $roles = $stmt->fetchAll(PDO::FETCH_ASSOC); //fetch all since we'll want multiple
+                                JOIN UserRoles on Roles.id = UserRoles.role_id 
+                                where UserRoles.user_id = :user_id and Roles.is_active = 1 and UserRoles.is_active = 1");
+                            $stmt->execute([":user_id" => $user_id]); // change the parameter to use the user_id
+                            $roles = $stmt->fetchAll(PDO::FETCH_ASSOC); // fetch all since we'll want multiple
                         } catch (Exception $e) {
                             error_log(var_export($e, true));
                         }
-                        //save roles or empty array
+                        // save roles or empty array
                         if (isset($roles)) {
-                            $_SESSION["user"]["roles"] = $roles; //at least 1 role
+                            $_SESSION["user"]["roles"] = $roles; // at least 1 role
                         } else {
-                            $_SESSION["user"]["roles"] = []; //no roles
+                            $_SESSION["user"]["roles"] = []; // no roles
                         }
                         flash("Welcome, " . get_username());
                         die(header("Location: home.php"));
@@ -109,7 +107,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         } catch (Exception $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
         }
-    }
+    }    
 }
 ?>
 <?php 
