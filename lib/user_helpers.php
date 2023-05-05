@@ -25,6 +25,20 @@ function has_role($role)
     }
     return false;
 }
+function get_firstname()
+{
+    if (is_logged_in()) { //we need to check for login first because "user" key may not exist
+        return se($_SESSION["user"], "firstname", "", false);
+    }
+    return "";
+}
+function get_lastname()
+{
+    if (is_logged_in()) { //we need to check for login first because "user" key may not exist
+        return se($_SESSION["user"], "lastname", "", false);
+    }
+    return "";
+}
 function get_username()
 {
     if (is_logged_in()) { //we need to check for login first because "user" key may not exist
