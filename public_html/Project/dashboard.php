@@ -32,6 +32,12 @@ require(__DIR__ . "/../../partials/nav.php");
       <a href="<?php echo get_url('withdraw.php'); ?>" class="btn btn-primary btn-lg btn-block">Withdraw</a>
     </div>
     <div class="col-sm-4">
+      <a href="<?php echo get_url('internal_transfer.php'); ?>" class="btn btn-primary btn-lg btn-block">Internal Transfer</a>
+    </div>
+    <div class="col-sm-4">
+      <a href="<?php echo get_url('external_transfer.php'); ?>" class="btn btn-primary btn-lg btn-block">External Transfer</a>
+    </div>
+    <div class="col-sm-4">
       <a href="<?php echo get_url('logout.php'); ?>" class="btn btn-primary btn-lg btn-block">Log Out</a>
     </div>
   </div>
