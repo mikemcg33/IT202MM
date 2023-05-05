@@ -1,40 +1,146 @@
-.alert-success {
+    .alert-success {
     background-color: green
-}
+    }
 
-.alert-warning {
+    .alert-warning {
     background-color: yellow;
-}
+    }
 
-.alert-danger {
+    .alert-danger {
     background-color: red;
-}
+    }
 
-.alert-info {
+    .alert-info {
     background-color: teal;
-}
-nav li{display: inline; background-color: rgb(229, 235, 55); font-size: large;}
-nav li a{color: rgb(0, 0, 0)}
-input{border-radius: 0%;}
-form {
+    }
+
+    nav li{display: inline; font-size: large;}
+    nav li a{color: rgb(0, 0, 0)}
+    input{border-radius: 0%;}
+    form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-  }
+    }
   
-  label {
+    label {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0px;
-  }
+    }
   
 
-body{
-    background-color: rgb(255, 255, 255);
+    body{
+    background-color: skyblue;
     color: rgb(0, 0, 0);
+    }
 
-}
+    fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    }
+    
+    legend {
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 10px;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: medium;
+    width: 100%;
+    }
+    
+    input[type="submit"] {
+    background-color: teal;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    }
+    
+    input[type="submit"]:hover {
+    background-color: rgba(0, 128, 128, 0.8);
+    }   
+    
+    .error-message {
+    color: red;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: small;
+    }
+    
+    .success-message {
+    color: green;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: small;
+    }
+
+    fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    }
+    
+    legend {
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 10px;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: medium;
+    width: 100%;
+    }
+    
+    input[type="submit"] {
+    background-color: teal;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    }
+    
+    input[type="submit"]:hover {
+    background-color: rgba(0, 128, 128, 0.8);
+    }
+    
+    .error-message {
+    color: red;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: small;
+    }
+    
+    .success-message {
+    color: green;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: small;
+    }
 
