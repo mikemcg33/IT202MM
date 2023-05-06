@@ -4,7 +4,7 @@ require(__DIR__ . "/../../partials/nav.php");
 // get the user's accounts
 $db = getDB();
 $user_id = get_user_id();
-$stmt = $db->prepare("SELECT id, account_number, account_type, balance FROM Accounts WHERE user_id = :id");
+$stmt = $db->prepare("SELECT id, account_number, account_type, balance FROM Accounts WHERE user_id = :id AND is_active = 1");
 $stmt->execute([":id" => $user_id]);
 $accounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
