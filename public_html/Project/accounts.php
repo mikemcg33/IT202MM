@@ -23,7 +23,7 @@ $account_type = se($_GET, "account_type", "", false);
 $user_id = $_SESSION['user_id'];
 $base_query = "SELECT id, account_type, account_number, balance, modified FROM Accounts";
 $total_query = "SELECT count(1) as total from Accounts";
-$query = " WHERE user_id = :user_id and balance >= 0"; 
+$query = " WHERE user_id = :user_id and balance >= 0 and is_active = 1"; 
 $params = [":user_id" => $user_id];
 //dynamic query
 //apply name filter

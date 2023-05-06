@@ -67,8 +67,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     }
     if (!$hasError) {
         $db = getDB();
-        $stmt = $db->prepare("SELECT id, firstname, lastname, email, username, password from Users 
-            where email = :email or username=:email");
+        $stmt = $db->prepare("SELECT id, firstname, lastname, email, username, password, is_public from Users where email = :email or username=:email");
         try {
             $r = $stmt->execute([":email" => $email]);
             if ($r) {
@@ -76,10 +75,12 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                 if ($user) {
                     $hash = $user["password"];
                     $user_id = $user["id"]; // add this line to get the user id
+                    $is_public = $user["is_public"]; // add this line to get is public
                     unset($user["password"]);
                     if (password_verify($password, $hash)) {
                         $_SESSION["user"] = $user; // sets our session data from db
                         $_SESSION["user_id"] = $user_id; // sets the user_id in the session
+                        $_SESSION["is_public"] = $is_public; // sets the is public in the session
                         try {
                             $stmt = $db->prepare("SELECT Roles.name FROM Roles 
                                 JOIN UserRoles on Roles.id = UserRoles.role_id 

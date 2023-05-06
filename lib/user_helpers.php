@@ -60,3 +60,12 @@ function get_user_id()
     }
     return false;
 }
+function get_user_is_public()
+{
+    if (is_logged_in()) { //we need to check for login first because "user" key may not exist
+        return se($_SESSION["user"], "is_public", false, false);
+    }
+    return false;
+}
+
+

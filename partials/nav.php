@@ -47,6 +47,8 @@ session_start();
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('withdraw.php'); ?>">Withdraw</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('internal_transfer.php'); ?>">Internal Transfer</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('external_transfer.php'); ?>">External Transfer</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('loan.php'); ?>">Loan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('close_account.php'); ?>">Close Account</a></li>
                     <?php endif; ?>
                 <?php if (is_logged_in()) : ?>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('dashboard.php'); ?>">Dashboard</a></li>
