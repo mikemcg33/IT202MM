@@ -69,7 +69,7 @@
             }
         }
 
-        function alterSpeed(){
+        function alterSpeed(){//mkm 5/5/23
             if(rightScore-leftScore>=3){
                 leftPaddle.s=6;
             }else if(leftScore-rightScore>=3){
@@ -78,7 +78,7 @@
                 leftPaddle.s=3
             }
         }
-        function alterHeight(){
+        function alterHeight(){//mkm 5/5/23
             if(rightScore-leftScore>=3){
                 leftPaddle.h=200;
             }else if(leftScore-rightScore>=3){
@@ -219,14 +219,14 @@
         function checkScore() {
             // Score if the ball goes past a paddle
             //left side of ball passes left side of paddle
-            if (ball.x < leftPaddle.x) {
+            if (ball.x < leftPaddle.x) {//mkm 5/5/23
                 rightScore++;
                 resetBall();
                 alterSpeed();
                 alterHeight();
             }
             //right side of ball passes right side of paddle 
-            else if (ball.x + ball.w > rightPaddle.x + rightPaddle.w) {
+            else if (ball.x + ball.w > rightPaddle.x + rightPaddle.w) {//mkm 5/5/23
                 leftScore++;
                 resetBall();
                 alterSpeed();
